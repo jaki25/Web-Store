@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Your box
+{% endblock title %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'bmdSite/box.css' %}">
+{% endblock css_files %}
+
+
+{% block content %}
+    <section id="stored-posts">
+        
+        <ul>
+            {% if has_something %}
+                <h2>This are selected articles</h2>
+                    {% comment "list" %}
+                        List all selected article with their data.
+                    {% endcomment %}
+                    {% for article in articles %}
+
+                        <li>
+                            
+                            <p >{{article.type_arttcle.name}} price=: <span class="single_item_price">{{article.type_arttcle.price}}</span> $</p>
+                            {% for article_id, quantity_self in quantity.items  %}
+
+                                {% if article_id == article.id %}
+                                    <input type="hidden" value="{{quantity_self}}" name="{{article.id}}" id="article_total_price" class="article_total_price">
+                                    <div class="number-wrapper">
+                                        <p class="text-number">Kolicina</p>
+                                        <input type="number" value="{{quantity_self}}" class='numberOf_article' id="numberOf_article" name="numberOf_article" min="1" max="{{article.quantity}}">
+                                    </div>
+                                {% endif %}
+                            {% endfor %}   
+
+                            {% for article_id, price in price_total_item.items  %}   
+                                {% if article_id == article.id %}
+                                    <p id="total-price" class="total-price" >Ukupna cijena=: ${{price}}</p>
+                                {% endif %}
+                            {% endfor %} 
+                            
+                                <form action="{% url 'box-page' %}" method="POST">
+                                    {% csrf_token %}
+                                    
+                                    <input type="hidden" value="{{article.id}}" name="article_id">
+                                    <button type="submit" class="delete-button" name="delete_article">Izbrisi</button>
+                                    <div class="border-basket"></div>
+                                </form>
+                            
+                        </li>
+                    {% endfor %}
+
+                    <form action="{% url 'box-page' %}" method="POST">
+                        {% csrf_token %}
+
+                        {% comment "imena id class" %}
+                            ovdje ne mijenjati nazive clasa i id i imena, direkto su vezana za backend kod
+                        {% endcomment %}
+
+                        <input type="hidden" value="${{price_total}}" class="form_total" name="total_price">
+                        <p id="total_price_r" class="total_price_r" name="total_price_r">Ukupna cijena Racuna=: ${{price_total}}</p>
+
+                        
+                        
+                        <input type="email" name="user_email" placeholder="Your email" class="input-basket"><br>
+                        <input type="tel" name="phone_num" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}-[0-9]{4}" placeholder="Your phone number" class="input-basket">
+                        <br>
+                        <button type="submit" name="buy_articles" class="by-button">Kupi</button>
+                    </form>   
+        
+        {% else %}
+                <h2>There is nothing slected yet. Please select something!!</h2>
+        {% endif %}
+    </ul>
+         
+        
+    </section>
+
+    
+    <script>
+        //JS code for quantity actions
+
+        const quantityInput= document.getElementsByClassName('numberOf_article');
+        const totalPricePerItem= document.getElementsByClassName('total-price');
+        const single_item_price= document.getElementsByClassName('single_item_price');
+        const total_price_r= document.getElementsByClassName('total_price_r');
+        const form_total=document.getElementsByClassName('form_total');
+        const article_total_price=document.getElementsByClassName('article_total_price');
+        var csrftoken='{{csrf_token}}'
+        let total_price = 0;
+        var name
+        console.log(total_price_r.value)
+        for(let i = 0; i < quantityInput.length; i++){
+            
+        quantityInput[i].addEventListener('input', function(){
+                total_price=0
+            
+                let quantity= quantityInput[i].value;
+                let pricePerItem = single_item_price[i].innerHTML;
+        
+                let total=quantity*pricePerItem;
+
+                totalPricePerItem[i].textContent=`Ukupna cijena: ${total}`;
+                article_total_price[i].setAttribute('value',`${total}`);
+
+
+                for(let j = 0; j < quantityInput.length; j++){
+                    quantity= quantityInput[j].value;
+                    pricePerItem = single_item_price[j].innerHTML;
+            
+                    let total=quantity*pricePerItem;
+    
+                    total_price += total
+                    console.log(total_price)
+                    total_price_r[0].textContent=`Ukupna cijena Racuna : ${total_price}`;
+                    form_total[0].setAttribute('value',`${total_price}`);
+                    
+                    console.log(article_total_price[j].name,quantity)
+                    dodajUSesiju(article_total_price[j].name,quantity)  
+                }
+                
+                //dodajUSesiju(article_total_price[i].name,quantity)
+                    
+                    
+                
+                    
+                    
+            })
+            
+           
+        }
+        
+        
+        function dodajUSesiju(kljuc, vrijednost){
+            console.log(kljuc,vrijednost)
+            $.ajax({
+                type:"POST",
+                url:"{% url 'add-session' %}",
+                headers:{
+                    "X-CSRFToken":csrftoken,
+                },
+                data: {
+                    
+                    'kljuc':kljuc,
+                    'vrijednost': vrijednost
+                },
+                success: function(response){
+                    console.log("Podaci su dodati u sesiju")
+                }
+            })
+        }
+
+
+    </script>
+    
+{% endblock content %}
+
+
+

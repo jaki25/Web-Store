@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'bmdSite/success.css' %}">
+{% endblock css_files %}
+
+{% block content %}
+    <div class="success-wrapper">
+        <h1>Succesifull buying</h1>
+        <p>Vas ukupan racun je=: {{total_price}}</p>
+    </div>
+{% endblock content %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    {{store_slug}}
+{% endblock title %}
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'bmdSite/post.css' %}">
+    <link rel="stylesheet" href={% static 'bmdSite/all-posts.css' %}>
+{% endblock css_files %}
+{% block content %}
+    <section id="all-posts">
+        <h2>{{store_name}}</h2>
+        
+            <ul>
+                
+                {% for article in store %}
+                
+                    {% include "bmdSite/includes/article.html" %}
+                    
+                {% endfor %}
+            </ul>
+        </article>
+    </section>
+{% endblock content %}

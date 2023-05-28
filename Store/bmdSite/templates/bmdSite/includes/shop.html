@@ -1,0 +1,17 @@
+<li>
+    <article class="post">
+
+      <a href="{% url 'store-page' shop.slug %}">
+
+        <img src="{{shop.image.url}}" alt={{shop.slug}} />
+        <div class="post__content">
+          <h3>{{ shop.name }}</h3>
+          <p>
+           {{ shop.address }}
+          </p>
+        </div>
+      </a>
+      
+    </article>
+    
+</li>

@@ -1,0 +1,21 @@
+.success-wrapper {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right top, #6305dd, #390281);
+    flex-direction: column;
+}
+
+.success-wrapper h1 {
+    font-size: 56px;
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+.success-wrapper p {
+    color: #fff;
+    font-size: 32px;
+    margin: 0;
+}

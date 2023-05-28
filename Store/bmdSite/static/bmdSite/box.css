@@ -1,0 +1,106 @@
+#main-navigation {
+  background-color: #390281;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+#stored-posts h2 {
+  margin-bottom: 40px;
+}
+#stored-posts {
+  margin: 8rem auto 3rem auto;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  width: 90%;
+  max-width: 30rem;
+}
+
+#stored-posts ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#stored-posts li {
+  margin: 1rem 0;
+}
+
+#stored-posts p {
+  transition: all 0.5s linear;
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: #1b1b1b;
+  font-weight: 400;
+  margin: 8px 0;
+
+}
+
+
+.delete-button {
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s linear;
+  padding:0;
+}
+.border-basket {
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+  margin-top: 16px;
+}
+.delete-button:hover {
+  color: #390281;
+}
+.by-button {
+  font-size: 18px;
+  background-color: #390281;
+  color: #fff;
+  padding: 8px 24px;
+  border-radius: 32px;
+  border: 1px solid #390281;
+  transition: all 0.3s linear;
+  cursor: pointer;
+}
+.by-button:hover {
+  color: #390281;
+  background-color: transparent;
+}
+.input-basket {
+  height: 44px;
+  border-radius: 32px;
+  border: 1px solid #ccc;
+  padding: 16px;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 16px;
+  transition: all 0.3s linear;
+}
+.input-basket:focus-visible {
+  border: 1px solid #390281;
+  outline: none !important;
+}
+input[type="number"]:focus-visible {
+  outline: none !important;
+}
+.number-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 16px;
+}
+.number-wrapper .text-number {
+  padding: 0 !important;
+  width: auto !important;
+  border: none !important;
+  margin: 0;
+}
+.total_price_r {
+  margin-bottom: 16px !important;
+  font-size: 18px;
+  color: #390281 !important;
+  font-weight: bold !important;
+}

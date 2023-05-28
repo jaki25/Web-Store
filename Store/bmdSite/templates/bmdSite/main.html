@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+    Glavna stranica
+{% endblock title %}    
+ 
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'bmdSite/post.css' %}">
+    <link rel="stylesheet" href="{% static 'bmdSite/index.css' %}">
+{% endblock css_files %}
+
+
+{% block content %}
+
+<section id="welcome">
+    <header>
+      <img src="{% static 'bmdSite/images/Me.jpg' %}" alt="Kosta- The Author Of This Blog" />
+      <h2>BMD.od Rasovic</h2>
+    </header>
+    <p>Welcom to the BMD shop site You can choose a shop to see a products</p>
+  </section>
+
+
+
+
+    <section id="latest-posts">
+        <h2>Choose your shop</h2>
+    
+        <ul>
+            {% for shop in stores  %}
+                {% include "bmdSite/includes/shop.html" %}
+            {% endfor %}
+        </ul>
+        
+    </section>
+
+    <div id="about">
+        <nav>
+            <h1>BMD store</h1>
+            <p>Buy and order everything on the one BMD store site, without going to the place<p>
+              <br>
+              <p>BMD is a store where you can buy everthing what you need for your house.
+                Food, Sports equipmnet,Home furniture, Kitchen staff and other things.
+                We have more branches, in which there are various artickles.
+                               
+              </p>
+          
+              <p><span>App's author: Kosta Rasovic</span></p>
+            
+          
+        </nav>
+      </div>
+{% endblock content %}

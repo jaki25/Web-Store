@@ -1,0 +1,26 @@
+<li>
+    <article class="post">
+
+      <a href="">
+
+        <img src="{{article.type_arttcle.image.url}}" alt={{article.type_arttcle.name}} />
+        <div class="post__content">
+          <h3>{{ article.type_arttcle.name }}  :: {{article.type_arttcle.price}}$</h3>
+          <h3>Quantity of article in Store: {{article.quantity}}| </h3>
+          <p>
+           {{ article.type_arttcle.text }}
+          </p>
+        </div>
+      </a>
+      <div id="read-later">
+        <form action="{% url 'store-page' article.store.slug %}" method='POST'>
+          {% csrf_token %}
+          <input type="hidden" value="{{article.id}}" name="article_id">
+
+          <button type="submit"> Dodaj   {{article.type_arttcle.name}} u Korpu</button>
+  
+        </form>
+      </div> 
+    </article>
+      
+</li>
